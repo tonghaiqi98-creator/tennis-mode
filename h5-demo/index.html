@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>云台网球模式 H5 Demo</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!-- H5 只模拟新增网球模式在拍摄页中的可见状态，不接入真实相机或云台。 -->
+    <main class="app-shell" aria-label="云台网球模式拍摄页模拟">
+      <section class="phone-stage">
+        <aside class="left-rail" aria-label="左侧相机参数栏">
+          <button class="icon-btn" type="button" aria-label="更多设置">
+            <span class="dots"></span>
+          </button>
+          <button class="icon-btn gimbal" type="button" aria-label="云台连接状态">
+            <span class="gimbal-icon"></span>
+            <span class="red-dot"></span>
+          </button>
+          <button class="icon-btn" type="button" aria-label="自动曝光">
+            <span class="badge-text">AUTO</span>
+          </button>
+          <button class="icon-btn" type="button" aria-label="分辨率帧率">
+            <span class="resolution">1080<br />60fps</span>
+          </button>
+          <div class="rail-spacer"></div>
+          <button class="icon-btn small" type="button" id="guideToggle">标尺</button>
+        </aside>
+
+        <section class="camera-preview" id="cameraPreview">
+          <!-- 模拟球场相机画面，包含网球场地线、球网、推荐取景框和球员移动。 -->
+          <div class="court-scene">
+            <div class="sky-space"></div>
+            <div class="court-plane">
+              <div class="baseline top"></div>
+              <div class="baseline bottom"></div>
+              <div class="sideline left"></div>
+              <div class="sideline right"></div>
+              <div class="single-line left"></div>
+              <div class="single-line right"></div>
+              <div class="service-line top"></div>
+              <div class="service-line bottom"></div>
+              <div class="center-line"></div>
+              <div class="net-line"></div>
+            </div>
+            <div class="player player-a" id="playerA"></div>
+            <div class="player player-b"></div>
+            <div class="tennis-ball" id="tennisBall"></div>
+          </div>
+
+          <div class="court-reference" id="courtReference">
+            <span class="ref-label top">上方留白</span>
+            <span class="ref-label center">球网对齐中线</span>
+            <span class="ref-label bottom">底线完整覆盖</span>
+          </div>
+
+          <div class="top-status">
+            <span class="status-pill record" id="recordTime">待录制</span>
+            <span class="status-pill">电量 92%</span>
+            <span class="status-pill" id="storageText">存储 0.0GB</span>
+            <span class="status-pill green" id="followText">云台待命</span>
+          </div>
+
+          <div class="zoom-switch">
+            <button type="button">0.7x</button>
+            <button type="button" class="active">1x</button>
+            <button type="button">5x</button>
+          </div>
+
+          <div class="instruction-card" id="instructionCard">
+            <strong id="instructionTitle">网球模式</strong>
+            <span id="instructionDetail">请让球网、底线和主要跑动区域落入参考框</span>
+          </div>
+
+          <div class="save-toast" id="saveToast">
+            <strong>已自动保存高清片段</strong>
+            <span id="toastReason">多拍回合</span>
+          </div>
+
+          <section class="storage-panel" aria-label="素材保存策略">
+            <header>
+              <strong id="saveState">重点片段识别已开启</strong>
+              <span>非重点降级</span>
+            </header>
+            <div class="storage-row">
+              <b>重点</b>
+              <p>多拍/长跑动/精彩得分</p>
+              <em>高清保存</em>
+            </div>
+            <div class="storage-row">
+              <b>普通</b>
+              <p>日常对打和间歇内容</p>
+              <em>低清缓存</em>
+            </div>
+            <div class="storage-row">
+              <b>无效</b>
+              <p>空场、架机、无运动内容</p>
+              <em>短期缓存</em>
+            </div>
+          </section>
+
+          <nav class="mode-strip" aria-label="相机模式切换">
+            <span>移动变焦</span>
+            <span>实况追踪</span>
+            <span class="active">网球模式</span>
+            <span>录像</span>
+            <span>延时摄影</span>
+          </nav>
+        </section>
+
+        <aside class="right-rail" aria-label="右侧拍摄控制栏">
+          <div class="live-dot"><span></span> 已连接</div>
+          <button class="tool-btn active" type="button">场地</button>
+          <button class="tool-btn" type="button">高光</button>
+          <button class="tool-btn" type="button">跟随</button>
+          <button class="tool-btn muted" type="button">主体</button>
+          <div class="rail-spacer"></div>
+          <button class="shutter" type="button" id="mainAction" aria-label="主操作">
+            <span></span>
+          </button>
+          <strong class="mode-name" id="modeName">确认取景</strong>
+          <button class="album-btn" type="button" id="resultButton">片段</button>
+        </aside>
+      </section>
+
+      <section class="result-drawer" id="resultDrawer" aria-label="重点片段列表">
+        <div class="drawer-card">
+          <header>
+            <div>
+              <span>本场结果</span>
+              <strong>已节省约 2.6GB 存储空间</strong>
+            </div>
+            <button type="button" id="closeDrawer">返回拍摄</button>
+          </header>
+          <div class="clip-list" id="clipList"></div>
+          <button type="button" class="highlight-button" id="makeMovie">生成集锦</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
