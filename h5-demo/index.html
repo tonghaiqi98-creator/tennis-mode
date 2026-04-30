@@ -9,6 +9,7 @@
   <body>
     <!-- H5 只模拟新增网球模式在拍摄页中的可见状态，不接入真实相机或云台。 -->
     <main class="app-shell" aria-label="云台网球模式拍摄页模拟">
+      <a class="journey-link" href="./journey.html">用户旅程地图</a>
       <section class="phone-stage">
         <aside class="left-rail" aria-label="左侧相机参数栏">
           <button class="icon-btn" type="button" aria-label="更多设置">
@@ -73,6 +74,21 @@
             <span id="instructionDetail">请让球网、底线和主要跑动区域落入参考框</span>
           </div>
 
+          <div class="setup-insights" id="setupInsights" aria-label="快速架设提示">
+            <div>
+              <strong>快速开拍</strong>
+              <span>默认参数，减少朋友等待</span>
+            </div>
+            <div>
+              <strong>腰部偏高</strong>
+              <span>到下胸口高度，腿更显长</span>
+            </div>
+            <div>
+              <strong>场地费高</strong>
+              <span>确认覆盖后直接开拍</span>
+            </div>
+          </div>
+
           <div class="save-toast" id="saveToast">
             <strong>已自动保存高清片段</strong>
             <span id="toastReason">多拍回合</span>
@@ -80,7 +96,7 @@
 
           <section class="storage-panel" aria-label="素材保存策略">
             <header>
-              <strong id="saveState">重点片段识别已开启</strong>
+              <strong id="saveState">重点片段保存已开启</strong>
               <span>非重点降级</span>
             </header>
             <div class="storage-row">
@@ -119,7 +135,7 @@
           <button class="shutter" type="button" id="mainAction" aria-label="主操作">
             <span></span>
           </button>
-          <strong class="mode-name" id="modeName">确认取景</strong>
+          <strong class="mode-name" id="modeName">确认范围</strong>
           <button class="album-btn" type="button" id="resultButton">片段</button>
         </aside>
       </section>

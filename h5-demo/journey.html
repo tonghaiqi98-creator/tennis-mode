@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>云台网球模式用户旅程地图</title>
+    <link rel="stylesheet" href="./journey.css" />
+  </head>
+  <body>
+    <main class="journey-page">
+      <header class="hero">
+        <a class="back-link" href="./index.html">返回拍摄页 Demo</a>
+        <p class="eyebrow">Insta360 Gimbal Tennis Mode</p>
+        <h1>云台网球模式用户旅程地图</h1>
+        <p class="summary">
+          围绕无人值守网球拍摄，从到达球场、横屏架机、场地标尺取景，到自动保存重点片段和生成集锦，梳理用户目标、痛点和产品触点。
+        </p>
+      </header>
+
+      <section class="map-card">
+        <div class="section-title">
+          <span>01</span>
+          <h2>核心旅程</h2>
+        </div>
+        <div class="journey-track" id="journeyTrack" aria-label="用户旅程阶段"></div>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="detail-card" id="detailCard" aria-label="阶段详情"></article>
+        <article class="emotion-card">
+          <div class="section-title compact">
+            <span>02</span>
+            <h2>情绪曲线</h2>
+          </div>
+          <svg class="emotion-chart" viewBox="0 0 760 260" role="img" aria-label="用户情绪曲线">
+            <defs>
+              <linearGradient id="lineGradient" x1="0" x2="1">
+                <stop offset="0%" stop-color="#ffdd35" />
+                <stop offset="100%" stop-color="#21e07b" />
+              </linearGradient>
+            </defs>
+            <line x1="54" y1="34" x2="54" y2="206" class="axis" />
+            <line x1="54" y1="206" x2="720" y2="206" class="axis" />
+            <polyline id="emotionLine" class="emotion-line" points="" />
+            <g id="emotionPoints"></g>
+          </svg>
+          <p class="chart-note">取景确认后信心上升；拍摄中无需看手机，系统自动保存重点片段，满意度持续提升。</p>
+        </article>
+      </section>
+
+      <section class="map-card">
+        <div class="section-title">
+          <span>03</span>
+          <h2>分泳道旅程地图</h2>
+        </div>
+        <div class="swimlane" id="swimlane"></div>
+      </section>
+
+      <section class="principles">
+        <div class="section-title">
+          <span>04</span>
+          <h2>关键体验原则</h2>
+        </div>
+        <div class="principle-grid">
+          <div>
+            <strong>减少架设时间</strong>
+            <p>默认网球模式策略，减少调试、模式选择和参数选择，降低朋友等待与场地费压力。</p>
+          </div>
+          <div>
+            <strong>不用人做参照</strong>
+            <p>拍摄前用户通常不在场内，因此优先用球网、底线、边线做取景标尺，一眼确认拍摄范围。</p>
+          </div>
+          <div>
+            <strong>腰部偏高机位</strong>
+            <p>推荐腰部偏高到下胸口高度，在保留运动区域的同时让人物比例更自然、腿更显长。</p>
+          </div>
+          <div>
+            <strong>默认横屏广构图</strong>
+            <p>保留横向跑动、发球抛球、挥拍空间，减少出画风险。</p>
+          </div>
+          <div>
+            <strong>后台化算法准备</strong>
+            <p>主路径不展示“识别锁定”等等待步骤，只在画面不可用或需要兜底时提示用户调整。</p>
+          </div>
+          <div>
+            <strong>轻量跟随修正</strong>
+            <p>人物接近边缘时再修正构图，避免强追导致画面甩动。</p>
+          </div>
+          <div>
+            <strong>重点高清保存</strong>
+            <p>多拍、长跑动、精彩得分高清保存，普通片段低清缓存，无效片段短期保留。</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./journey.js"></script>
+  </body>
+</html>

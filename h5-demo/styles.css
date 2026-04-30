@@ -41,6 +41,21 @@ button {
   padding: 18px;
 }
 
+.journey-link {
+  position: fixed;
+  left: 18px;
+  top: 18px;
+  z-index: 20;
+  padding: 10px 13px;
+  color: #111;
+  background: var(--accent);
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 1000;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.36);
+}
+
 .phone-stage {
   position: relative;
   display: grid;
@@ -553,6 +568,50 @@ button {
 
 .instruction-card.compact strong {
   font-size: 16px;
+}
+
+.setup-insights {
+  position: absolute;
+  left: 18px;
+  bottom: 190px;
+  z-index: 4;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  width: min(560px, 68%);
+  transition: 0.22s ease;
+}
+
+.setup-insights.hidden {
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+.setup-insights div {
+  padding: 11px 12px;
+  background: rgba(0, 0, 0, 0.58);
+  border: 1px solid rgba(255, 210, 31, 0.28);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+
+.setup-insights strong,
+.setup-insights span {
+  display: block;
+}
+
+.setup-insights strong {
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 1000;
+}
+
+.setup-insights span {
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 12px;
+  font-weight: 800;
 }
 
 .save-toast {

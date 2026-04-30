@@ -1,4 +1,4 @@
-// 拍摄页 H5 状态机：用 Mock 状态模拟架机确认、识别、录制和高光保存。
+// 拍摄页 H5 状态机：用 Mock 状态模拟架机确认、录制和高光保存。
 const state = {
   phase: "guide",
   seconds: 0,
@@ -25,7 +25,7 @@ const highlightPool = [
     type: "精彩得分",
     time: "00:18",
     duration: "9 秒",
-    reason: "识别到明显加速挥拍和回合结束动作。"
+    reason: "捕捉到明显加速挥拍和回合结束动作。"
   }
 ];
 
@@ -42,6 +42,7 @@ const els = {
   followText: document.querySelector("#followText"),
   saveState: document.querySelector("#saveState"),
   saveToast: document.querySelector("#saveToast"),
+  setupInsights: document.querySelector("#setupInsights"),
   toastReason: document.querySelector("#toastReason"),
   resultButton: document.querySelector("#resultButton"),
   resultDrawer: document.querySelector("#resultDrawer"),
@@ -62,7 +63,7 @@ render();
 
 function handleMainAction() {
   if (state.phase === "guide") {
-    startRecognition();
+    confirmFraming();
     return;
   }
 
@@ -76,20 +77,9 @@ function handleMainAction() {
   }
 }
 
-function startRecognition() {
-  state.phase = "recognizing";
+function confirmFraming() {
+  state.phase = "ready";
   render();
-
-  setInstruction("正在识别球场线", "正在锁定底线、球网、发球线和推荐拍摄区域");
-  els.modeName.textContent = "识别中";
-  els.mainAction.disabled = true;
-
-  setTimeout(() => {
-    setInstruction("拍摄区域已锁定", "默认广构图开启，人物接近边缘时云台会轻量修正");
-    state.phase = "ready";
-    els.mainAction.disabled = false;
-    render();
-  }, 1800);
 }
 
 function startRecording() {
@@ -131,7 +121,7 @@ function saveHighlight() {
   window.setTimeout(() => {
     els.saveToast.classList.remove("visible");
     if (state.phase === "recording") {
-      els.saveState.textContent = "正在识别重点片段";
+      els.saveState.textContent = "正在捕捉重点片段";
     }
   }, 2100);
 }
@@ -161,23 +151,25 @@ function render() {
   els.mainAction.classList.toggle("confirm", state.phase === "guide" || state.phase === "ready");
   els.recordTime.classList.toggle("recording", state.phase === "recording");
   els.instructionCard.classList.toggle("compact", state.phase === "recording");
+  els.setupInsights.classList.toggle("hidden", state.phase === "recording");
 
   if (state.phase === "guide") {
-    setInstruction("网球模式", "请让球网、底线和主要跑动区域落入参考框");
-    els.modeName.textContent = "确认取景";
+    setInstruction("网球模式", "看实时拍摄范围：覆盖半场/全场即可开拍；机位建议腰部偏高到下胸口");
+    els.modeName.textContent = "确认范围";
     els.followText.textContent = "云台待命";
-    els.saveState.textContent = "重点片段识别已开启";
+    els.saveState.textContent = "重点片段保存已开启";
   }
 
   if (state.phase === "ready") {
     els.modeName.textContent = "开始录制";
     els.followText.textContent = "云台待命";
+    setInstruction("拍摄范围已确认", "默认参数已就绪，减少调试时间，点击右侧即可开拍");
   }
 
   if (state.phase === "recording") {
     setInstruction("云台自动跟随", "人物接近画面边缘时进行轻量修正，避免强追导致甩动");
     els.modeName.textContent = "结束拍摄";
-    els.saveState.textContent = "正在识别重点片段";
+    els.saveState.textContent = "正在捕捉重点片段";
     updateRecordingStatus();
   }
 }
